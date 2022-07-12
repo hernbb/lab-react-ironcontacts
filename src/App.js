@@ -15,19 +15,25 @@ function App() {
     setContacts(current => [...current, random ])
   }
   const alphabeticalSort = ()=> {contacts.sort((a, b) =>{
-    if(a.name< b.name) return -1;
-    if(a.name> b.name) return 1;
+    if(a.name < b.name) return -1;
+    if(a.name > b.name) return 1;
     return 0;
    })
    setContacts(current => [...current])
   }
    const popularitySort = ()=> {contacts.sort((a, b)=> {
-    if(a.popularity> b.popularity) return -1;
+    if(a.popularity > b.popularity) return -1;
     if(a.popularity < b.popularity) return 1;
     return 0;
    })
    setContacts(current => [...current])
   }
+  const deleteContact = (contactId) => {
+    const filteredContacts = contacts.filter((contact) => {
+      return contact._id !== contactId;
+    })
+    setContacts(filteredContacts)
+  };
 
   return (
     <div className="App-header">
@@ -55,7 +61,7 @@ function App() {
         contacto.wonOscar ? (
           <p>🏆</p> //Render esto si SI
         ) : (
-          <></> //Render esto si NO
+          <td></td> //Render esto si NO
         )
       }
       {
@@ -63,9 +69,10 @@ function App() {
         contacto.wonEmmy ? (
           <p>🏆</p> //Render esto si SI
         ) : (
-          <></> //Render esto si NO
+          <td></td> //Render esto si NO
         )
       }
+      <td><button onClick={()=> deleteContact(contacto.id)} className="">Delete</button></td>
                </tr>
               )
           })}
