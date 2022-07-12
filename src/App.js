@@ -3,8 +3,8 @@ import "./App.css";
 import contactsData from "./contacts.json";
 import React, { useState } from "react";
 
-const contactos = contactsData.slice(0, 6)
-const contactosSobrantes = contactsData.slice(7)
+const contactos = contactsData.splice(0, 6)
+const contactosSobrantes = contactsData.splice(6)
 
 function App() {
   
@@ -14,18 +14,27 @@ function App() {
   
     setContacts(current => [...current, random ])
   }
-  const alphabeticalSort = ()=> {contacts.sort(function(a, b) {
-    if(a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-    if(a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+  const alphabeticalSort = ()=> {contacts.sort((a, b) =>{
+    if(a.name< b.name) return -1;
+    if(a.name> b.name) return 1;
     return 0;
-   })}
+   })
+   setContacts(current => [...current])
+  }
+   const popularitySort = ()=> {contacts.sort((a, b)=> {
+    if(a.popularity> b.popularity) return -1;
+    if(a.popularity < b.popularity) return 1;
+    return 0;
+   })
+   setContacts(current => [...current])
+  }
 
   return (
     <div className="App-header">
     <h1>IronContacts</h1>
     <button onClick={randomClick}>Add Random Contact</button>
     <button onClick={alphabeticalSort}>Sort by name</button>
-    <button onClick={randomClick}>Add Random Contact</button>
+    <button onClick={popularitySort}>Sort by popularity</button>
       <table>
         <tr>
           <th>picture</th>
