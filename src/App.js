@@ -30,7 +30,7 @@ function App() {
   }
   const deleteContact = (contactId) => {
     const filteredContacts = contacts.filter((contact) => {
-      return contact._id !== contactId;
+      return contact.id !== contactId;
     })
     setContacts(filteredContacts)
   };
@@ -67,7 +67,7 @@ function App() {
       {
         //El actor ha ha ganado un Emmy?
         contacto.wonEmmy ? (
-          <p>🏆</p> //Render esto si SI
+          <p>🌟</p> //Render esto si SI
         ) : (
           <td></td> //Render esto si NO
         )
